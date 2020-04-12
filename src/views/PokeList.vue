@@ -1,0 +1,132 @@
+<template>
+  <div class="pokelist">
+    <h1>{{ title }}</h1>
+    <v-row
+      class="fill-height"
+      align-content="center"
+      justify="center"
+      v-if="initialLoading"
+    >
+      <v-col class="subtitle-1 text-center" cols="12">
+        Initializing...
+      </v-col>
+      <v-col cols="6">
+        <v-progress-linear
+          color="green accent-4"
+          indeterminate
+          rounded
+          height="6"
+        ></v-progress-linear>
+      </v-col>
+    </v-row>
+    <v-row v-else>
+      <v-col
+        v-for="poke of pokemons"
+        :key="poke.id"
+        cols="12"
+        sm="12"
+        md="4"
+        lg="3"
+      >
+        <PokeCard :data="poke" @VIEW_POKEMON="viewPokemon" />
+      </v-col>
+    </v-row>
+    <div class="text-center my-4" v-if="nextBatch">
+      <v-btn @click="loadMore" dark :loading="loading" class="load-more"
+        >Load More</v-btn
+      >
+    </div>
+    <PokeInfo ref="pokemonInfo" />
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+import PokeCard from "@/components/PokeCard.vue";
+import PokeInfo from "@/components/PokeInfo.vue";
+
+export default {
+  name: "PokeList",
+  props: {
+    msg: String
+  },
+  created() {
+    this.getAllPokemons();
+  },
+  data: () => ({
+    title: "List of Pokemon",
+    pokemons: [],
+    limit: 12,
+    nextBatch: null,
+    imageUrl:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
+    initialLoading: true,
+    loading: false
+  }),
+  methods: {
+    async getAllPokemons() {
+      this.initialLoading = true;
+      const res = await axios.get(
+        "https://pokeapi.co/api/v2/pokemon?limit=" + this.limit
+      );
+      this.pokemons = res.data.results.map(subdata => {
+        const id = subdata.url.split("/")[subdata.url.split("/").length - 2];
+        return {
+          id,
+          ...subdata,
+          imageUrl: `${this.imageUrl}${id}.png`
+        };
+      });
+      if (res.data.next) {
+        this.nextBatch = res.data.next;
+      }
+      this.initialLoading = false;
+    },
+    async loadMore() {
+      this.loading = true;
+      const res = await axios.get(this.nextBatch);
+      const pokemons = res.data.results.map(item => {
+        const id = item.url.split("/")[item.url.split("/").length - 2];
+        return {
+          ...item,
+          id,
+          imageUrl: `${this.imageUrl}${id}.png`
+        };
+      });
+      this.pokemons = [...this.pokemons, ...pokemons];
+      if (res.data.next) {
+        this.nextBatch = res.data.next;
+      }
+      this.loading = false;
+    },
+    async viewPokemon(id) {
+      const { data } = await axios.get(
+        "https://pokeapi.co/api/v2/pokemon/" + id
+      );
+      this.$refs.pokemonInfo.viewPokemon(data);
+    }
+  },
+  components: {
+    PokeCard,
+    PokeInfo
+  }
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+</style>
