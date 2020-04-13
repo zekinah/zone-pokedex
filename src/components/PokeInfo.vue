@@ -8,7 +8,7 @@
   >
     <v-card>
       <v-card-title>
-        <span class="headline text-capitalize">{{ detail.name }}</span>
+        <span class="pokemon-id text-capitalize">#{{ info.id }}</span>
         <v-spacer></v-spacer>
         <v-btn icon @click="dialog = false">
           <v-icon>mdi-close</v-icon>
@@ -19,49 +19,70 @@
           <v-img
             alt="Pokemon Logo"
             contain
-            :src="detail.image"
+            :src="info.image"
             transition="scale-transition"
             width="200"
           />
         </div>
-        <div class="cart-details">
-          <div
-            class="d-flex justify-space-between body-1 font-weight-bold border-bottom"
-          >
-            <span>Base Experience</span>
-            <span>{{ detail.base_experience }} XP</span>
+        <div class="pokemon-info cart-infos">
+          <div class="pokemon-name">
+            <span class="title text-capitalize font-weight-black">{{
+              info.name
+            }}</span>
           </div>
-          <div
-            class="d-flex justify-space-between body-1 font-weight-bold border-bottom mt-3"
-          >
-            <span>Height</span>
-            <span>{{ detail.height }} dm</span>
+          <div class="pokemon-description mt-3">
+            <p class="font-weight-regular" v-if="dataSpecies">
+              {{ dataSpecies.flavor_text_entries[1].flavor_text }}
+            </p>
           </div>
-          <div
-            class="d-flex justify-space-between body-1 font-weight-bold border-bottom mt-3"
-          >
-            <span>Weight</span>
-            <span>{{ detail.weight }} hg</span>
+          <div class="pokemon-data font-weight-medium mt-3">
+            <div class="d-flex justify-space-between body-1 border-bottom">
+              <span>Base Experience</span>
+              <span>{{ info.base_experience }} XP</span>
+            </div>
+            <v-divider></v-divider>
+            <div class="d-flex justify-space-between body-1 border-bottom mt-3">
+              <span>Height</span>
+              <span>{{ info.height }} dm</span>
+            </div>
+            <v-divider></v-divider>
+            <div class="d-flex justify-space-between body-1 border-bottom mt-3">
+              <span>Weight</span>
+              <span>{{ info.weight }} hg</span>
+            </div>
+            <v-divider></v-divider>
+            <div class="body-1 mt-3">Types</div>
+            <v-chip
+              class="ma-2 chip-type"
+              color="primary"
+              small
+              v-for="t in info.types"
+              :key="t.type.name"
+              >{{ t.type.name }}</v-chip
+            >
+            <v-divider></v-divider>
+            <div class="body-1 mt-3">Abilities</div>
+            <v-chip
+              class="ma-2 chip-ability"
+              color="red"
+              small
+              dark
+              v-for="a in info.abilities"
+              :key="a.ability.name"
+              >{{ a.ability.name }}</v-chip
+            >
+            <v-divider></v-divider>
+            <div class="body-1 mt-3">Moves</div>
+            <v-chip
+              class="ma-2 chip-moves"
+              color="pink lighten-3"
+              small
+              dark
+              v-for="m in info.moves"
+              :key="m.move.name"
+              >{{ m.move.name }}</v-chip
+            >
           </div>
-          <div class="body-1 font-weight-bold mt-3">Types</div>
-          <v-chip
-            class="mr-2"
-            color="primary"
-            small
-            v-for="t in detail.types"
-            :key="t.type.name"
-            >{{ t.type.name }}</v-chip
-          >
-          <div class="body-1 font-weight-bold mt-3">Abilities</div>
-          <v-chip
-            class="mr-2"
-            color="red"
-            small
-            dark
-            v-for="a in detail.abilities"
-            :key="a.ability.name"
-            >{{ a.ability.name }}</v-chip
-          >
         </div>
       </v-card-text>
     </v-card>
@@ -69,25 +90,51 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "PokeInfo",
   data: () => ({
     dialog: false,
     imageUrl:
       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
-    detail: []
+    info: [],
+    dataSpecies: null
   }),
   methods: {
     viewPokemon(data) {
-      this.detail = {
+      this.info = {
         ...data,
         image: `${this.imageUrl}${data.id}.png`
       };
-
       this.dialog = true;
+      this.getSpecies(data.id);
+    },
+    async getSpecies(id) {
+      const { data } = await axios.get(
+        "https://pokeapi.co/api/v2/pokemon-species/" + id
+      );
+      this.dataSpecies = data;
+      // console.log(this.dataSpecies);
     }
   }
 };
 </script>
 
-<style></style>
+<style scoped lang="scss">
+span.pokemon-id {
+  font-size: 30px;
+  opacity: 0.5;
+}
+div.pokemon-name {
+  text-align: center;
+}
+div.pokemon-info.cart-infos {
+  background: #fff;
+  padding: 15px;
+  border-top-left-radius: 35px;
+  border-top-right-radius: 35px;
+}
+.v-card__text {
+  padding: 0 !important;
+}
+</style>

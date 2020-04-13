@@ -33,10 +33,23 @@
     </v-row>
     <div class="text-center my-4" v-if="nextBatch">
       <v-btn @click="loadMore" dark :loading="loading" class="load-more"
-        >Load More</v-btn
+        >Load More Pokémon</v-btn
       >
     </div>
     <PokeInfo ref="pokemonInfo" />
+    <v-btn
+      class="scroll-top"
+      v-scroll="onScroll"
+      v-show="fab"
+      fab
+      dark
+      fixed
+      bottom
+      right
+      @click="toTop"
+    >
+      <v-icon>mdi-chevron-up</v-icon>
+    </v-btn>
   </div>
 </template>
 
@@ -54,14 +67,15 @@ export default {
     this.getAllPokemons();
   },
   data: () => ({
-    title: "List of Pokemon",
+    title: "List of Pokémon",
     pokemons: [],
     limit: 12,
     nextBatch: null,
     imageUrl:
       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
     initialLoading: true,
-    loading: false
+    loading: false,
+    fab: false
   }),
   methods: {
     async getAllPokemons() {
@@ -104,6 +118,14 @@ export default {
         "https://pokeapi.co/api/v2/pokemon/" + id
       );
       this.$refs.pokemonInfo.viewPokemon(data);
+    },
+    onScroll(e) {
+      if (typeof window === "undefined") return;
+      const top = window.pageYOffset || e.target.scrollTop || 0;
+      this.fab = top > 20;
+    },
+    toTop() {
+      this.$vuetify.goTo(0);
     }
   },
   components: {
@@ -128,5 +150,8 @@ li {
 }
 a {
   color: #42b983;
+}
+button.scroll-top.v-btn {
+  background-color: #003459 !important;
 }
 </style>

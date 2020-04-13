@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app dark>
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <v-list nav dense>
         <v-list-item-group active-class="teal--text text--accent-4">
@@ -14,7 +14,7 @@
     </v-navigation-drawer>
     <v-app-bar dark>
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-      <v-toolbar-title>Pokemon</v-toolbar-title>
+      <v-toolbar-title>Pokémon</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
@@ -25,12 +25,14 @@
         <router-view />
       </v-container>
     </v-content>
-    <v-footer padless dark>
-      <v-col class="text-right" cols="12">
-        {{ new Date().getFullYear() }} —
+    <v-footer padless dark dense>
+      <v-col class="text-center" cols="12">
+        {{ new Date().getFullYear() }}
+        © All rights reserved. Made with ❤️ by
         <strong>
           <a :href="gitHub" target="_blank">Zekinah Lecaros</a>
         </strong>
+        .
       </v-col>
     </v-footer>
   </v-app>
@@ -43,7 +45,7 @@ export default {
       drawer: false,
       items: [
         { title: "Home", icon: "mdi-view-dashboard", link: "/" },
-        { title: "Pokemon List", icon: "mdi-image", link: "/pokemon-list" },
+        { title: "Pokémon List", icon: "mdi-image", link: "/pokemon-list" },
         { title: "About", icon: "mdi-help-box", link: "/about" }
       ],
       activeBtn: 1,
@@ -62,20 +64,24 @@ export default {
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Teko:600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2:wght@500&display=swap");
 
-$body-font-family: "Teko";
+$body-font-family: "Baloo Bhaina 2";
 $title-font: "Teko";
 .v-application {
-  font-family: $body-font-family, sans-serif !important;
+  font-family: $body-font-family, cursive !important;
   .title {
-    font-family: $title-font, sans-serif !important;
+    font-family: $body-font-family, cursive !important;
   }
 }
 #app {
-  font-family: "Teko", sans-serif;
+  font-family: $body-font-family;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  background: linear-gradient(1deg, #152d2c 0%, #37ce8a 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #ffffff;
 }
 #nav {
   padding: 30px;
@@ -91,10 +97,14 @@ $title-font: "Teko";
   text-decoration: none;
   color: #37ce8a !important;
 }
-main.v-content {
-  background: linear-gradient(1deg, #152d2c 0%, #37ce8a 100%);
-  background-size: cover;
-  background-repeat: no-repeat;
+
+header.v-sheet.v-app-bar {
+  border-bottom-left-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+}
+
+.v-card.v-card--hover {
+  border-radius: 20px !important;
 }
 
 .v-card {
@@ -118,7 +128,8 @@ header.v-sheet.v-sheet--tile.theme--dark {
 }
 
 button.v-btn.load-more {
-  background-color: #ff686b !important;
+  background: linear-gradient(0.31deg, #983639 0.7%, #ff686b 99.3%);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 
 footer.v-footer {
