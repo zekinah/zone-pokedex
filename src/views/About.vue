@@ -3,7 +3,7 @@
     <h1>About</h1>
     <v-content>
       <v-container>
-        <h3>PokedexZone</h3>
+        <h3>Zone - Pokédex</h3>
         <p>An open source Modern Design Pokédex.</p>
         <p>Built with VueCli, Vuetify, and PokeAPI.</p>
         <v-icon> mdi-github</v-icon>
