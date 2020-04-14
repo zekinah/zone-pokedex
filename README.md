@@ -1,6 +1,6 @@
 # INPROGRESS PROJECT - Zone - Pokedex
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/e64e5765-1f6c-4272-833f-6f8b0ca775a9/deploy-status)](https://app.netlify.com/sites/focused-mayer-b2fe41/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/dbcf5109-d2aa-4a63-8bd4-75bd76a567b6/deploy-status)](https://app.netlify.com/sites/zonepokedex/deploys)
 
 ## Project setup
 ```
