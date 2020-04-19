@@ -48,7 +48,7 @@
       </v-col>
     </v-row>
     <div class="text-center my-4" v-if="nextBatch" v-show="nextBatch">
-      <v-btn @click="loadMore" dark :loading="loading" class="load-more"
+      <v-btn @click="loadMore" dark :loading="loadMoreloading" class="load-more"
         >Load More Pokémon</v-btn
       >
     </div>
@@ -91,6 +91,7 @@ export default {
     imageUrl:
       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
     initialLoading: true,
+    loadMoreloading: false,
     limit: 12,
     nextBatch: null,
     fab: false,
@@ -118,6 +119,7 @@ export default {
     },
     /** Loadmore Button */
     async loadMore() {
+      this.loadMoreloading = true;
       const res = await axios.get(this.nextBatch);
       const pokemons = res.data.results.map(item => {
         const id = item.url.split("/")[item.url.split("/").length - 2];
@@ -131,6 +133,7 @@ export default {
       if (res.data.next) {
         this.nextBatch = res.data.next;
       }
+      this.loadMoreloading = false;
     },
     /** Get all Generations */
     fetchAll() {

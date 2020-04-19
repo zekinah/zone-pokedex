@@ -15,13 +15,26 @@
         </v-btn>
       </v-card-title>
       <v-card-text>
-        <div class="d-flex flex-column align-center">
+        <div
+          class="d-flex flex-column align-center"
+          @mouseover="mouseHover = true"
+          @mouseleave="mouseHover = false"
+        >
           <v-img
             alt="Pokemon Logo"
             contain
-            :src="info.image"
+            :src="info.imageDefault"
             transition="scale-transition"
             width="200"
+            v-show="!mouseHover"
+          />
+          <v-img
+            alt="Pokemon Logo"
+            contain
+            :src="info.imageBack"
+            transition="scale-transition"
+            width="200"
+            v-show="mouseHover && info.imageBack"
           />
         </div>
         <div class="pokemon-info cart-infos">
@@ -32,7 +45,7 @@
           </div>
           <div class="pokemon-description mt-3">
             <p class="font-weight-regular" v-if="dataSpecies">
-              {{ dataSpecies.flavor_text_entries[1].flavor_text }}
+              {{ description }}
             </p>
           </div>
           <div class="pokemon-data font-weight-medium mt-3">
@@ -95,16 +108,21 @@ export default {
   name: "PokeInfo",
   data: () => ({
     dialog: false,
-    imageUrl:
+    imageDefaultUrl:
       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
+    imageBackUrl:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/",
+    mouseHover: false,
     info: [],
-    dataSpecies: null
+    dataSpecies: [],
+    description: ""
   }),
   methods: {
     viewPokemon(data) {
       this.info = {
         ...data,
-        image: `${this.imageUrl}${data.id}.png`
+        imageDefault: `${this.imageDefaultUrl}${data.id}.png`,
+        imageBack: `${this.imageBackUrl}${data.id}.png`
       };
       this.dialog = true;
       this.getSpecies(data.id);
@@ -113,8 +131,27 @@ export default {
       const { data } = await axios.get(
         "https://pokeapi.co/api/v2/pokemon-species/" + id
       );
-      this.dataSpecies = data;
-      // console.log(this.dataSpecies);
+      this.dataSpecies = data.flavor_text_entries;
+      const desc = this.dataSpecies.map(item => {
+        const lang = item.language.name == "en" ? item.flavor_text : "";
+        return {
+          lang
+        };
+      });
+      /** Filtered Object by removing null value*/
+      // const filtered = desc.filter(function (el) {
+      //   return el.lang != null;
+      // });
+      /** Distinct the Value of Object */
+      const distinct = [
+        ...new Map(desc.map(item => [item.lang, item])).values()
+      ];
+      var txt = "",
+        d;
+      for (d in distinct) {
+        txt += distinct[d].lang + " ";
+      }
+      this.description = txt;
     }
   }
 };
