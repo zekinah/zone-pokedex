@@ -20,6 +20,22 @@
       </v-col>
     </v-row>
     <v-row v-else>
+      <v-col class="subtitle-1 text-center" cols="12">
+        <v-card dark>
+          <v-card-text class="d-flex flex-column align-center text-capitalize">
+            <v-radio-group row v-model="genValue" :mandatory="false">
+              <v-radio label="All" value="all" @change="fetchAll"></v-radio>
+              <v-radio
+                v-for="gen of generations"
+                :key="gen.id"
+                :label="gen.name"
+                :value="gen.url"
+                @change="viewPerGeneration(gen.url)"
+              ></v-radio>
+            </v-radio-group>
+          </v-card-text>
+        </v-card>
+      </v-col>
       <v-col
         v-for="poke of pokemons"
         :key="poke.id"
@@ -31,7 +47,7 @@
         <PokeCard :data="poke" @VIEW_POKEMON="viewPokemon" />
       </v-col>
     </v-row>
-    <div class="text-center my-4" v-if="nextBatch">
+    <div class="text-center my-4" v-if="nextBatch" v-show="nextBatch">
       <v-btn @click="loadMore" dark :loading="loading" class="load-more"
         >Load More Pokémon</v-btn
       >
@@ -65,19 +81,23 @@ export default {
   },
   created() {
     this.getAllPokemons();
+    this.getAllGenerations();
   },
   data: () => ({
     title: "List of Pokémon",
     pokemons: [],
-    limit: 12,
-    nextBatch: null,
+    generations: [],
+    pokemonPerGeneration: [],
     imageUrl:
       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
     initialLoading: true,
-    loading: false,
-    fab: false
+    limit: 12,
+    nextBatch: null,
+    fab: false,
+    genValue: "all"
   }),
   methods: {
+    /** Get Pokemon */
     async getAllPokemons() {
       this.initialLoading = true;
       const res = await axios.get(
@@ -96,8 +116,8 @@ export default {
       }
       this.initialLoading = false;
     },
+    /** Loadmore Button */
     async loadMore() {
-      this.loading = true;
       const res = await axios.get(this.nextBatch);
       const pokemons = res.data.results.map(item => {
         const id = item.url.split("/")[item.url.split("/").length - 2];
@@ -111,8 +131,35 @@ export default {
       if (res.data.next) {
         this.nextBatch = res.data.next;
       }
-      this.loading = false;
     },
+    /** Get all Generations */
+    fetchAll() {
+      this.getAllPokemons();
+    },
+    async getAllGenerations() {
+      const { data } = await axios.get("https://pokeapi.co/api/v2/generation/");
+      this.generations = data.results;
+    },
+    async viewPerGeneration(url) {
+      function compare(a, b) {
+        if (a.name < b.name) return -1;
+        if (a.name > b.name) return 1;
+        return 0;
+      }
+      const { data } = await axios.get(url);
+      this.pokemonPerGeneration = data.pokemon_species.sort(compare);
+      const pokemons = this.pokemonPerGeneration.map(item => {
+        const id = item.url.split("/")[item.url.split("/").length - 2];
+        return {
+          ...item,
+          id,
+          imageUrl: `${this.imageUrl}${id}.png`
+        };
+      });
+      this.pokemons = pokemons;
+      this.nextBatch = false;
+    },
+    /** View Specific Pokemon */
     async viewPokemon(id) {
       const { data } = await axios.get(
         "https://pokeapi.co/api/v2/pokemon/" + id
