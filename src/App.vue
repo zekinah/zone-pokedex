@@ -45,7 +45,10 @@ export default {
       drawer: false,
       items: [
         { title: "Home", icon: "mdi-view-dashboard", link: "/" },
-        { title: "Pokémon List", icon: "mdi-image", link: "/pokemon-list" },
+        { title: "Pokémon List", icon: "mdi-pokeball", link: "/pokemon-list" },
+        { title: "Generation", icon: "mdi-view-comfy", link: "#" },
+        { title: "Types", icon: "mdi-format-list-bulleted-type", link: "#" },
+        { title: "Region", icon: "mdi-pokemon-go", link: "#" },
         { title: "About", icon: "mdi-help-box", link: "/about" }
       ],
       activeBtn: 1,
@@ -134,5 +137,64 @@ button.v-btn.load-more {
 
 footer.v-footer {
   background: linear-gradient(90deg, #152d2c 0%, #707070 100%);
+}
+
+/** Type of Pokemon Color */
+.v-chip-bug {
+  background: #a8b820 !important;
+}
+.v-chip-dark {
+  background: #705848 !important;
+}
+.v-chip-dragon {
+  background: #7038f8 !important;
+}
+.v-chip-electric {
+  background: #f8d030 !important;
+}
+.v-chip-fairy {
+  background: #ee99ac !important;
+}
+.v-chip-fighting {
+  background: #c03028 !important;
+}
+.v-chip-fire {
+  background: #f08030 !important;
+}
+.v-chip-flying {
+  background: #a890f0 !important;
+}
+.v-chip-ghost {
+  background: #705898 !important;
+}
+.v-chip-grass {
+  background: #78c850 !important;
+}
+.v-chip-ground {
+  background: #e0c068 !important;
+}
+.v-chip-ice {
+  background: #98d8d8 !important;
+}
+.v-chip-normal {
+  background: #a8a878 !important;
+}
+.v-chip-poison {
+  background: #a040a0 !important;
+}
+.v-chip-psychic {
+  background: #f85888 !important;
+}
+.v-chip-rock {
+  background: #b8a038 !important;
+}
+.v-chip-steel {
+  background: #b8b8d0 !important;
+}
+.v-chip-water {
+  background: #6890f0 !important;
+}
+.v-chip-unknown {
+  background: #68a090 !important;
 }
 </style>

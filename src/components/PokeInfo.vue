@@ -34,68 +34,141 @@
             :src="info.imageBack"
             transition="scale-transition"
             width="200"
-            v-show="mouseHover && info.imageBack"
+            v-show="mouseHover"
           />
         </div>
         <div class="pokemon-info cart-infos">
           <div class="pokemon-name">
-            <span class="title text-capitalize font-weight-black">{{
-              info.name
-            }}</span>
-          </div>
-          <div class="pokemon-description mt-3">
-            <p class="font-weight-regular" v-if="dataSpecies">
-              {{ description }}
+            <p class="headline text-capitalize font-weight-black">
+              {{ info.name }}
             </p>
           </div>
-          <div class="pokemon-data font-weight-medium mt-3">
-            <div class="d-flex justify-space-between body-1 border-bottom">
-              <span>Base Experience</span>
-              <span>{{ info.base_experience }} XP</span>
-            </div>
-            <v-divider></v-divider>
-            <div class="d-flex justify-space-between body-1 border-bottom mt-3">
-              <span>Height</span>
-              <span>{{ info.height }} dm</span>
-            </div>
-            <v-divider></v-divider>
-            <div class="d-flex justify-space-between body-1 border-bottom mt-3">
-              <span>Weight</span>
-              <span>{{ info.weight }} hg</span>
-            </div>
-            <v-divider></v-divider>
-            <div class="body-1 mt-3">Types</div>
+          <div class="pokemon-type text-center">
             <v-chip
-              class="ma-2 chip-type"
-              color="primary"
-              small
-              v-for="t in info.types"
-              :key="t.type.name"
-              >{{ t.type.name }}</v-chip
-            >
-            <v-divider></v-divider>
-            <div class="body-1 mt-3">Abilities</div>
-            <v-chip
-              class="ma-2 chip-ability"
-              color="red"
-              small
+              class="ma-2"
               dark
-              v-for="a in info.abilities"
-              :key="a.ability.name"
-              >{{ a.ability.name }}</v-chip
-            >
-            <v-divider></v-divider>
-            <div class="body-1 mt-3">Moves</div>
-            <v-chip
-              class="ma-2 chip-moves"
-              color="pink lighten-3"
-              small
-              dark
-              v-for="m in info.moves"
-              :key="m.move.name"
-              >{{ m.move.name }}</v-chip
+              v-for="t in pokeTypes"
+              :key="t.typename"
+              :class="t.typeclass"
+              >{{ t.typename }}</v-chip
             >
           </div>
+          <v-container>
+            <v-row>
+              <v-col cols="12" sm="12" lg="12">
+                <div class="pokemon-stats my-4">
+                  <div
+                    class="pokemon-data font-weight-medium mt-3"
+                    v-for="st in info.stats"
+                    :key="st.stat.name + '-label'"
+                  >
+                    <div
+                      class="d-flex justify-space-between body-1 border-bottom"
+                    >
+                      <span class="text-capitalize">{{ st.stat.name }}</span>
+                      <span>{{ st.base_stat }}</span>
+                    </div>
+                    <v-divider></v-divider>
+                  </div>
+                </div>
+              </v-col>
+              <v-col cols="12" sm="12" lg="12">
+                <v-row justify="center">
+                  <v-expansion-panels accordion focusable>
+                    <v-expansion-panel>
+                      <v-expansion-panel-header
+                        class="title font-weight-medium"
+                      >
+                        Information
+                        <template v-slot:actions>
+                          <v-icon color="error">mdi-pokemon-go</v-icon>
+                        </template>
+                      </v-expansion-panel-header>
+                      <v-expansion-panel-content>
+                        <div class="pokemon-description mt-3">
+                          <p class="body-2" v-if="dataSpecies">
+                            {{ pokeDescription }}
+                          </p>
+                        </div>
+                      </v-expansion-panel-content>
+                    </v-expansion-panel>
+                    <v-expansion-panel>
+                      <v-expansion-panel-header
+                        class="title font-weight-medium"
+                      >
+                        Profile
+                        <template v-slot:actions>
+                          <v-icon color="error">mdi-pokemon-go</v-icon>
+                        </template>
+                      </v-expansion-panel-header>
+                      <v-expansion-panel-content>
+                        <div class="pokemon-data font-weight-medium mt-3">
+                          <div
+                            class="d-flex justify-space-between body-1 border-bottom"
+                          >
+                            <span>Base Experience</span>
+                            <span>{{ info.base_experience }} XP</span>
+                          </div>
+                          <v-divider></v-divider>
+                          <div
+                            class="d-flex justify-space-between body-1 border-bottom mt-3"
+                          >
+                            <span>Height</span>
+                            <span>{{ info.height }} dm</span>
+                          </div>
+                          <v-divider></v-divider>
+                          <div
+                            class="d-flex justify-space-between body-1 border-bottom mt-3"
+                          >
+                            <span>Weight</span>
+                            <span>{{ info.weight }} hg</span>
+                          </div>
+                          <v-divider></v-divider>
+                          <div class="body-1 mt-3">Abilities</div>
+                          <v-chip
+                            class="ma-2 chip-ability"
+                            color="red"
+                            dark
+                            v-for="a in info.abilities"
+                            :key="a.ability.name"
+                            >{{ a.ability.name }}</v-chip
+                          >
+                        </div>
+                      </v-expansion-panel-content>
+                    </v-expansion-panel>
+                    <v-expansion-panel>
+                      <v-expansion-panel-header
+                        class="title font-weight-medium"
+                      >
+                        Moves
+                        <template v-slot:actions>
+                          <v-icon color="error">mdi-pokemon-go</v-icon>
+                        </template>
+                      </v-expansion-panel-header>
+                      <v-expansion-panel-content>
+                        <v-chip
+                          class="ma-2 chip-moves"
+                          color="pink lighten-3"
+                          dark
+                          v-for="m in info.moves"
+                          :key="m.move.name"
+                          >{{ m.move.name }}</v-chip
+                        >
+                      </v-expansion-panel-content>
+                    </v-expansion-panel>
+                  </v-expansion-panels>
+
+                  <!-- <v-expansion-panel>
+                      <v-expansion-panel-header>Moves</v-expansion-panel-header>
+                      <v-expansion-panel-content>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      </v-expansion-panel-content>
+                    </v-expansion-panel>
+                  </v-expansion-panels> -->
+                </v-row>
+              </v-col>
+            </v-row>
+          </v-container>
         </div>
       </v-card-text>
     </v-card>
@@ -115,7 +188,8 @@ export default {
     mouseHover: false,
     info: [],
     dataSpecies: [],
-    description: ""
+    pokeDescription: "",
+    pokeTypes: []
   }),
   methods: {
     viewPokemon(data) {
@@ -126,6 +200,7 @@ export default {
       };
       this.dialog = true;
       this.getSpecies(data.id);
+      this.setTypesColor(this.info.types);
     },
     async getSpecies(id) {
       const { data } = await axios.get(
@@ -151,7 +226,18 @@ export default {
       for (d in distinct) {
         txt += distinct[d].lang + " ";
       }
-      this.description = txt;
+      this.pokeDescription = txt;
+    },
+    setTypesColor(types) {
+      const type = types.map(item => {
+        const typename = item.type.name;
+        const typeclass = "v-chip-" + item.type.name;
+        return {
+          typename,
+          typeclass
+        };
+      });
+      this.pokeTypes = type;
     }
   }
 };
