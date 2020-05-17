@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import PokeList from "./views/PokeList.vue";
+import PokeType from "./views/PokeType.vue";
 
 Vue.use(Router);
 
@@ -25,6 +26,11 @@ export default new Router({
       path: "/pokemon-list",
       name: "pokelist",
       component: PokeList
+    },
+    {
+      path: "/pokemon-type",
+      name: "poketype",
+      component: PokeType
     }
   ]
 });

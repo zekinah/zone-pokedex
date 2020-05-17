@@ -47,7 +47,11 @@ export default {
         { title: "Home", icon: "mdi-view-dashboard", link: "/" },
         { title: "Pokémon List", icon: "mdi-pokeball", link: "/pokemon-list" },
         { title: "Generation", icon: "mdi-view-comfy", link: "#" },
-        { title: "Types", icon: "mdi-format-list-bulleted-type", link: "#" },
+        {
+          title: "Types",
+          icon: "mdi-format-list-bulleted-type",
+          link: "/pokemon-type"
+        },
         { title: "Region", icon: "mdi-pokemon-go", link: "#" },
         { title: "About", icon: "mdi-help-box", link: "/about" }
       ],
@@ -68,9 +72,28 @@ export default {
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Teko:600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2:wght@500&display=swap");
-
 $body-font-family: "Baloo Bhaina 2";
 $title-font: "Teko";
+$bug: #a8b820;
+$dark: #705848;
+$dragon: #7038f8;
+$electric: #f8d030;
+$fairy: #ee99ac;
+$fighting: #c03028;
+$fire: #f08030;
+$flying: #a890f0;
+$ghost: #705898;
+$grass: #78c850;
+$ground: #e0c068;
+$ice: #98d8d8;
+$normal: #a8a878;
+$poison: #a040a0;
+$psychic: #f85888;
+$rock: #b8a038;
+$steel: #b8b8d0;
+$water: #6890f0;
+$unknown: #68a090;
+
 .v-application {
   font-family: $body-font-family, cursive !important;
   .title {
@@ -141,60 +164,60 @@ footer.v-footer {
 
 /** Type of Pokemon Color */
 .v-chip-bug {
-  background: #a8b820 !important;
+  background: $bug !important;
 }
 .v-chip-dark {
-  background: #705848 !important;
+  background: $dark !important;
 }
 .v-chip-dragon {
-  background: #7038f8 !important;
+  background: $dragon !important;
 }
 .v-chip-electric {
-  background: #f8d030 !important;
+  background: $electric !important;
 }
 .v-chip-fairy {
-  background: #ee99ac !important;
+  background: $fairy !important;
 }
 .v-chip-fighting {
-  background: #c03028 !important;
+  background: $fighting !important;
 }
 .v-chip-fire {
-  background: #f08030 !important;
+  background: $fire !important;
 }
 .v-chip-flying {
-  background: #a890f0 !important;
+  background: $flying !important;
 }
 .v-chip-ghost {
-  background: #705898 !important;
+  background: $flying !important;
 }
 .v-chip-grass {
-  background: #78c850 !important;
+  background: $grass !important;
 }
 .v-chip-ground {
-  background: #e0c068 !important;
+  background: $ground !important;
 }
 .v-chip-ice {
-  background: #98d8d8 !important;
+  background: $ice !important;
 }
 .v-chip-normal {
-  background: #a8a878 !important;
+  background: $normal !important;
 }
 .v-chip-poison {
-  background: #a040a0 !important;
+  background: $poison !important;
 }
 .v-chip-psychic {
-  background: #f85888 !important;
+  background: $psychic !important;
 }
 .v-chip-rock {
-  background: #b8a038 !important;
+  background: $rock !important;
 }
 .v-chip-steel {
-  background: #b8b8d0 !important;
+  background: $steel !important;
 }
 .v-chip-water {
-  background: #6890f0 !important;
+  background: $water !important;
 }
 .v-chip-unknown {
-  background: #68a090 !important;
+  background: $unknown !important;
 }
 </style>

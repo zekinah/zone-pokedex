@@ -8,18 +8,18 @@
         width="180"
       />
     </div>
-    <HelloWorld msg="Welcome to Zone - Pokedex" />
+    <PokeHome msg="Welcome to Zone - Pokedex" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import PokeHome from "@/components/PokeHome.vue";
 
 export default {
   name: "home",
   components: {
-    HelloWorld
+    PokeHome
   }
 };
 </script>

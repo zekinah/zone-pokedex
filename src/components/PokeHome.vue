@@ -31,7 +31,11 @@ export default {
       { title: "Home", icon: "mdi-view-dashboard", link: "/" },
       { title: "Pokémon List", icon: "mdi-pokeball", link: "/pokemon-list" },
       { title: "Generation", icon: "mdi-view-comfy", link: "#" },
-      { title: "Types", icon: "mdi-format-list-bulleted-type", link: "#" },
+      {
+        title: "Types",
+        icon: "mdi-format-list-bulleted-type",
+        link: "/pokemon-type"
+      },
       { title: "Region", icon: "mdi-pokemon-go", link: "#" },
       { title: "About", icon: "mdi-help-box", link: "/about" }
     ]
