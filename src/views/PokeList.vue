@@ -117,7 +117,7 @@ export default {
       }
       this.initialLoading = false;
     },
-    /** Loadmore Button */
+    /** Loadmore */
     async loadMore() {
       this.loadMoreloading = true;
       const res = await axios.get(this.nextBatch);
