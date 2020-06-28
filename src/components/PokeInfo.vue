@@ -135,7 +135,7 @@
                         <v-card-text>
                           <v-chip
                             class="ma-2 chip-moves"
-                            color="pink lighten-3"
+                            color="blue-grey darken-4"
                             dark
                             v-for="m in info.moves"
                             :key="m.move.name"

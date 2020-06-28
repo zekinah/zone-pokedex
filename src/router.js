@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import PokeList from "./views/PokeList.vue";
+import PokeGen from "./views/PokeGen.vue";
 import PokeType from "./views/PokeType.vue";
 
 Vue.use(Router);
@@ -26,6 +27,11 @@ export default new Router({
       path: "/pokemon-list",
       name: "pokelist",
       component: PokeList
+    },
+    {
+      path: "/pokemon-generation",
+      name: "pokegen",
+      component: PokeGen
     },
     {
       path: "/pokemon-type",

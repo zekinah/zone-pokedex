@@ -32,7 +32,7 @@ $unknown: #68a090;
   font-family: $body-font-family;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(1deg, #152d2c 0%, #37ce8a 100%);
+  background: linear-gradient(1deg, #152d2c 0%, #2a9066 100%);
   background-size: cover;
   background-repeat: no-repeat;
   color: #ffffff;
@@ -49,7 +49,7 @@ $unknown: #68a090;
 }
 .v-application a {
   text-decoration: none;
-  color: #37ce8a !important;
+  color: #2a9066 !important;
 }
 
 header.v-sheet.v-app-bar {
@@ -67,7 +67,7 @@ header.v-sheet.v-app-bar {
 }
 
 .v-dialog {
-  background: linear-gradient(1deg, #152d2c 0%, #37ce8a 100%);
+  background: linear-gradient(1deg, #152d2c 0%, #2a9066 100%);
   border-top-left-radius: 35px !important;
   border-top-right-radius: 35px !important;
 }
@@ -147,4 +147,11 @@ footer.v-footer {
 }
 .v-chip-unknown {
   background: $unknown !important;
+}
+.pokegeneration .theme--light.v-tabs-items {
+    background-color: transparent !important;
+}
+
+.v-window-item.v-window-item--active {
+    padding: 15px;
 }
