@@ -91,7 +91,7 @@
                   dark
                   :loading="loadMoreMoveLoading"
                   class="load-more"
-                  >Load More Pokémon</v-btn
+                  >Load More Moves</v-btn
                 >
               </div>
             </v-tab-item>

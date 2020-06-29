@@ -7,13 +7,30 @@
         <p>
           An open source Modern Design Pokédex. A fanbase experiment and no
           other intention to overide or add additional information that can
-          cause a false idea of the original site.
+          cause false idea to the original site.
         </p>
-        <p>Built with VueJS, Vuetify, and PokeAPI.</p>
-        <v-icon> mdi-github</v-icon>
-        <v-icon> mdi-facebook</v-icon>
-        <v-icon> mdi-linkedin</v-icon>
+        <p>
+          Built with <a :href="vuejs" target="_blank">Vue JS</a>,
+          <a :href="vuetify" target="_blank">Vuetify</a>, and
+          <a :href="pokeapi" target="_blank">PokéAPI</a>.
+        </p>
+        <p>
+          Special Thanks to <a :href="pokemon" target="_blank">Pokémon</a>, the
+          original website.
+        </p>
       </v-container>
     </v-content>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      vuejs: "//vuejs.org/",
+      vuetify: "//vuetifyjs.com",
+      pokeapi: "//pokeapi.co/",
+      pokemon: "//www.pokemon.com/us/"
+    };
+  }
+};
+</script>

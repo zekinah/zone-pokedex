@@ -8,7 +8,7 @@
         width="300"
       />
     </div>
-    <PokeHome msg="Welcome to Zone - Pokedex" />
+    <PokeHome msg="Randomizer" />
   </div>
 </template>
 

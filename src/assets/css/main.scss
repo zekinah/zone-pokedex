@@ -37,19 +37,9 @@ $unknown: #68a090;
   background-repeat: no-repeat;
   color: #ffffff;
 }
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 .v-application a {
   text-decoration: none;
-  color: #2a9066 !important;
+  color: #37ce8a !important;
 }
 
 header.v-sheet.v-app-bar {

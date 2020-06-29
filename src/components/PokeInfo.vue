@@ -189,13 +189,27 @@ export default {
       const { data } = await axios.get(
         "https://pokeapi.co/api/v2/pokemon-species/" + id
       );
-      const desc = data.flavor_text_entries.findIndex(item => {
-        let lang = item.language.name === "en";
+      this.dataSpecies = data.flavor_text_entries;
+      const desc = this.dataSpecies.map(item => {
+        const lang = item.language.name == "en" ? item.flavor_text : "";
         return {
           lang
         };
       });
-      this.pokeDescription = data.flavor_text_entries[desc].flavor_text;
+      /** Filtered Object by removing null value*/
+      // const filtered = desc.filter(function (el) {
+      //   return el.lang != null;
+      // });
+      /** Distinct the Value of Object */
+      const distinct = [
+        ...new Map(desc.map(item => [item.lang, item])).values()
+      ];
+      var txt = "",
+        d;
+      for (d in distinct) {
+        txt += distinct[d].lang + " ";
+      }
+      this.pokeDescription = txt;
     },
     setTypesColor(types) {
       const type = types.map(item => {
