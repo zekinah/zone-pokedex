@@ -5,7 +5,7 @@
         alt="Pokemon logo"
         src="../assets/images/pokemon_logo.png"
         transition="scale-transition"
-        width="180"
+        width="300"
       />
     </div>
     <PokeHome msg="Welcome to Zone - Pokedex" />

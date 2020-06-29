@@ -113,7 +113,7 @@
                               class="d-flex justify-space-between body-1 border-bottom mt-3"
                             >
                               <span>Weight</span>
-                              <span>{{ info.weight }} hg</span>
+                              <span>{{ info.weight }} kg</span>
                             </div>
                             <v-divider></v-divider>
                             <div class="body-1 mt-3">Abilities</div>
@@ -189,27 +189,13 @@ export default {
       const { data } = await axios.get(
         "https://pokeapi.co/api/v2/pokemon-species/" + id
       );
-      this.dataSpecies = data.flavor_text_entries;
-      const desc = this.dataSpecies.map(item => {
-        const lang = item.language.name == "en" ? item.flavor_text : "";
+      const desc = data.flavor_text_entries.findIndex(item => {
+        let lang = item.language.name === "en";
         return {
           lang
         };
       });
-      /** Filtered Object by removing null value*/
-      // const filtered = desc.filter(function (el) {
-      //   return el.lang != null;
-      // });
-      /** Distinct the Value of Object */
-      const distinct = [
-        ...new Map(desc.map(item => [item.lang, item])).values()
-      ];
-      var txt = "",
-        d;
-      for (d in distinct) {
-        txt += distinct[d].lang + " ";
-      }
-      this.pokeDescription = txt;
+      this.pokeDescription = data.flavor_text_entries[desc].flavor_text;
     },
     setTypesColor(types) {
       const type = types.map(item => {
