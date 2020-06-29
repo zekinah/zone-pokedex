@@ -17,9 +17,9 @@
         <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
         <v-toolbar-title>Pokémon</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn icon>
+        <!-- <v-btn icon>
           <v-icon>mdi-magnify</v-icon>
-        </v-btn>
+        </v-btn> -->
       </v-app-bar>
       <v-container>
         <router-view />
@@ -55,6 +55,18 @@ export default {
       activeBtn: 1,
       gitHub: "//github.com/zekinah/"
     };
+  },
+  metaInfo() {
+    return { 
+        title: "Zone Pokedex - a modern design pokedex",
+        meta: [
+            { name: 'description', content:  'Build for the pokemon lover and enthusiast. Made with ❤️ by Zekinah Lecaros '},
+            { property: 'og:title', content: "Zone Pokedex - a modern design pokedex"},
+            { property: 'og:site_name', content: 'Zone Pokedex'},
+            { property: 'og:type', content: 'website'},    
+            { name: 'robots', content: 'index,follow'} 
+        ]
+    }
   }
 };
 </script>
