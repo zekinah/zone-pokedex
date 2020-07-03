@@ -84,7 +84,8 @@ export default {
     pokemon: [],
     pokeTypes: [],
     pokeInformation: "",
-    imageUrl: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/",
+    imageUrl:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other-sprites/official-artwork/",
     imageDefaultUrl:
       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
   }),
@@ -93,7 +94,7 @@ export default {
   },
   methods: {
     getPokemon() {
-      let id = Math.floor(Math.random() * 800);
+      let id = Math.floor(Math.random() * 722);
       this.getData(id);
       this.getSpecies(id);
     },

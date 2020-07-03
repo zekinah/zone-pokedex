@@ -70,7 +70,7 @@ export default {
     title: "List of Pokémon",
     pokemons: [],
     imageUrl:
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other-sprites/official-artwork/",
     initialLoading: true,
     loadMoreloading: false,
     limit: 60,
