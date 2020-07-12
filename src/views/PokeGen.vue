@@ -154,7 +154,7 @@ export default {
     types: [],
     generations: [],
     imageUrl:
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other-sprites/official-artwork/",
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
     initialLoading: true,
     loadMorePokemonLoading: false,
     loadMoreMoveLoading: false,

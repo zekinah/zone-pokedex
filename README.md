@@ -22,11 +22,8 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
 ### Forking this repo and contribute
-Many people have contacted me asking me if they can use this code for their own website or modified some, and the answer to that question is usually yes, and I am happy if you put with attribution. Thank you.
+Some people asked me if they can use this code for their own website or modified some, and the answer to that question is usually yes, and I am happy if you put with attribution. Thank you.
 
 ### Message of the author
 I know that the code is bad, but I am in the process of learning, This project is just my experimental tool in way to learn and understand Vue JS, and I hope you understand.
@@ -34,6 +31,8 @@ I know that the code is bad, but I am in the process of learning, This project i
 ### API Used
 * PokéAPI - https://pokeapi.co/
 
-### Author
+### Acknowledgments
+* Hat tip for the third party libraries that are used into this site.
 
-* **Zekinah Joy Lecaros** - *Initial work* - [Zekinah Lecaros](https://github.com/zekinah)
+### 👨‍💻 Author
+* **Zekinah Lecaros** - *Initial work* - [Zekinah Lecaros](https://zekinahlecaros.com/)

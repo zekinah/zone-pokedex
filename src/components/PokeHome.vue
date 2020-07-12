@@ -104,8 +104,8 @@ export default {
         "https://pokeapi.co/api/v2/pokemon/" + id
       );
       this.setTypesColor(data.types);
-      let imageID = this.addZero(id);
-      let animatedImage = this.imageUrl + "" + imageID + ".png";
+      // let imageID = this.addZero(id);
+      let animatedImage = this.imageUrl + "" + id + ".png";
       // let defaultImage = this.imageDefaultUrl + "" + id + ".png";
       // let animatedImage = urlExists(animatedImage, defaultImage)
       this.pokemon = {
