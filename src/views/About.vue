@@ -18,6 +18,12 @@
           Special Thanks to <a :href="pokemon" target="_blank">Pokémon</a>, the
           original website.
         </p>
+        <p>
+          This project has now newest version, more clean code and optimized,
+          you can visit it here
+          <a :href="version2" target="_blank">Zone-Pokédex2</a>. Thank you for
+          appreciation.
+        </p>
       </v-container>
     </v-content>
   </div>
@@ -26,10 +32,11 @@
 export default {
   data() {
     return {
-      vuejs: "//vuejs.org/",
-      vuetify: "//vuetifyjs.com",
-      pokeapi: "//pokeapi.co/",
-      pokemon: "//www.pokemon.com/us/"
+      vuejs: "https://vuejs.org/",
+      vuetify: "https://vuetifyjs.com",
+      pokeapi: "https://pokeapi.co/",
+      pokemon: "https://www.pokemon.com/us/",
+      version2: "https://zonepokedex2.netlify.app/"
     };
   }
 };

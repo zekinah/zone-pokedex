@@ -85,7 +85,7 @@ export default {
     pokeTypes: [],
     pokeInformation: "",
     imageUrl:
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other-sprites/official-artwork/",
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/",
     imageDefaultUrl:
       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
   }),
@@ -104,10 +104,7 @@ export default {
         "https://pokeapi.co/api/v2/pokemon/" + id
       );
       this.setTypesColor(data.types);
-      // let imageID = this.addZero(id);
       let animatedImage = this.imageUrl + "" + id + ".png";
-      // let defaultImage = this.imageDefaultUrl + "" + id + ".png";
-      // let animatedImage = urlExists(animatedImage, defaultImage)
       this.pokemon = {
         ...data,
         image: animatedImage
